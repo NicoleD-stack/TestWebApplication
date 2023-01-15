@@ -9,10 +9,10 @@ namespace TestWebApplication.Controllers
     [ApiController]
     public class CustomerInformationController : ControllerBase
     {
-        private readonly Microsoft.Extensions.Logging.ILogger _logger;
+        private readonly ILogger<CustomerInformationController> _logger;
         private readonly IConfiguration _configuration;
 
-        public CustomerInformationController(IConfiguration configuration,ILogger logger)
+        public CustomerInformationController(IConfiguration configuration, ILogger<CustomerInformationController> logger)
         {
             _configuration = configuration;
             _logger = logger;
@@ -20,7 +20,7 @@ namespace TestWebApplication.Controllers
 
         // POST api/<CustomerInformationController>
         [HttpPost]
-        public Guid Post([FromBody] string policyId, string firstName, string lastName, string emailAddress, string dateOfBirth)
+        public Guid Post(string policyId, string firstName, string lastName, string emailAddress, string dateOfBirth)
         {
             var customerInformationDB = new CustomerInformationDB(_configuration, _logger);
 
