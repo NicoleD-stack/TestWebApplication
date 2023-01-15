@@ -7,10 +7,10 @@ namespace TestWebApplication.Database
 {
     public class CustomerInformationDB
     {
-        private readonly ILogger<CustomerInformationDB> _logger;
+        private readonly Microsoft.Extensions.Logging.ILogger _logger;
         private readonly IConfiguration _configuration;
 
-        public CustomerInformationDB(IConfiguration configuration, ILogger<CustomerInformationDB> logger)
+        public CustomerInformationDB(IConfiguration configuration, ILogger logger)
         {
             _configuration = configuration;
             _logger = logger;
