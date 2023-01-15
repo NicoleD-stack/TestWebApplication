@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TestWebApplication.Database;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,43 +9,25 @@ namespace TestWebApplication.Controllers
     [ApiController]
     public class CustomerInformationController : ControllerBase
     {
-        private readonly ILogger<CustomerInformationController> _logger;
+        private readonly Microsoft.Extensions.Logging.ILogger _logger;
+        private readonly IConfiguration _configuration;
 
-        public CustomerInformationController(ILogger<CustomerInformationController> logger)
+        public CustomerInformationController(IConfiguration configuration,ILogger logger)
         {
+            _configuration = configuration;
             _logger = logger;
-        }
-
-        // GET: api/<CustomerInformationController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<CustomerInformationController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
         }
 
         // POST api/<CustomerInformationController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Guid Post([FromBody] string policyId, string firstName, string lastName, string emailAddress, string dateOfBirth)
         {
+            var customerInformationDB = new CustomerInformationDB(_configuration, _logger);
+
+            var guid = customerInformationDB.SaveCustomerInformation(policyId, firstName, lastName, emailAddress, dateOfBirth);
+
+            return guid;
         }
 
-        // PUT api/<CustomerInformationController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<CustomerInformationController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
