@@ -7,7 +7,7 @@ namespace TestWebApplication.Utilities
         public bool ValidateCharacterLimit(string str)
         {
             // checks string is between 3 and 50 characters
-            Regex rx = new(@"^.*[a - z]{ 3, 50 }$");
+            Regex rx = new(@"[a-zA-Z]{3,50}$");
             return rx.IsMatch(str);
 
         }
@@ -25,7 +25,7 @@ namespace TestWebApplication.Utilities
             var isValid = true;
             DateTime? birthDate = DateTime.Parse(str);
 
-            if (birthDate < DateTime.Now.AddYears(-18))
+            if (birthDate > DateTime.Now.AddYears(-18))
             {
                 isValid= false;
                 return isValid;
@@ -41,8 +41,7 @@ namespace TestWebApplication.Utilities
             // checks email address contains at least 4 alpha numeric chars followed by @ then 2 alpha numeric chars
             // email address should end in either com or co.uk
             
-            Regex rx = new(@"^[a-z0-9]{4}\b[@][A-Z0-9]{2}$");
-
+            Regex rx = new(@"^[a-z0-9]{4,}[@][a-z0-9.]{2,}$");
             return rx.IsMatch(str) && (str.EndsWith(".com") || str.EndsWith(".co.uk"));
            
         }  

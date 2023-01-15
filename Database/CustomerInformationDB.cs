@@ -25,43 +25,32 @@ namespace TestWebApplication.Database
 
             if (!string.IsNullOrEmpty(policyRef))
             {
-                if (regexValidate.ValidatePolicyReferenceNumber(policyRef))
+                if (!regexValidate.ValidatePolicyReferenceNumber(policyRef))
                 {
                     return Guid.Empty;
                 }
-            }
-            else
-            {
-                return Guid.Empty;
             }
 
             if (!string.IsNullOrEmpty(customerFirstName))
             {
-                if (regexValidate.ValidateCharacterLimit(customerFirstName))
+                if (!regexValidate.ValidateCharacterLimit(customerFirstName))
                 {
                     return Guid.Empty;
                 }
-            }
-            else
-            {
-                return Guid.Empty;
             }
 
             if (!string.IsNullOrEmpty(customerLastName))
             {
-                if (regexValidate.ValidateCharacterLimit(customerLastName))
+                if (!regexValidate.ValidateCharacterLimit(customerLastName))
                 {
                     return Guid.Empty;
                 }
             }
-            else
-            {
-                return Guid.Empty;
-            }
+
 
             if (!string.IsNullOrEmpty(customerEmail))
             {
-                if (regexValidate.ValidateEmailAddress(customerEmail))
+                if (!regexValidate.ValidateEmailAddress(customerEmail))
                 {
                     return Guid.Empty;
                 }
@@ -69,7 +58,7 @@ namespace TestWebApplication.Database
 
             if (!string.IsNullOrEmpty(customerDateOfBirth))
             {
-                if (regexValidate.AgeValidation(customerDateOfBirth))
+                if (!regexValidate.AgeValidation(customerDateOfBirth))
                 {
                     return Guid.Empty;
                 }
