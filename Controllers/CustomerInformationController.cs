@@ -20,8 +20,8 @@ namespace TestWebApplication.Controllers
         }
 
         // POST api/<CustomerInformationController>
-        [HttpPost]
-        public Guid Post(string policyId, string firstName, string lastName, string emailAddress, string dateOfBirth)
+        [HttpPost()]
+        public Guid Post(string policyId, string firstName, string lastName, string? emailAddress = null, string? dateOfBirth = null)
         {
             var customerInformationDB = new CustomerInformationDB(_configuration, _logger);
 
